@@ -1,0 +1,26 @@
+{
+  "name": "3-times-reporting-panel",
+  "version": "1.0.0",
+  "description": "This is 3 Times Reporting Panel App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --max-old-space-size=4076 index.js"
+  },
+  "author": "Ankit Kumar",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.12.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.0",
+    "nodemailer": "^6.6.3",
+    "web-push": "^3.4.5"
+  }
+}
