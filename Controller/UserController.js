@@ -41,16 +41,6 @@ exports.loginUser = async (req, res) => {
             if (user && user.length > 0) {
                 if (user[0].password === password) {
                     const { user_id, user_name, name, employee_code, gh } = user[0];
-                    // Set Cookie
-                    /*
-                    var cookie = req.cookies.userID;
-                    if (cookie === undefined) {
-                        res.cookie('userID', user_id, {expiresIn: '1h', httpOnly: true})
-                        console.log('cookie created successfully');
-                    } else {
-                        console.log('cookie exists', cookie);
-                    }
-                    */
                     if (gh === 0) {
                         inputData = {
                             user_id: user_id,
