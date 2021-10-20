@@ -24,6 +24,14 @@ var get_cookies = function (request) {
 
 exports.loginUser = async (req, res) => {
     const { email, password } = req.body;
+    const date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1; // getMonth returns a zero-based index of the month: 0-11
+    let day = date.getDate(); // 0 - 31
+    if (month < 10) { month = '0' + month }
+    if (day < 10) { day = '0' + day }
+    const finaldate = year + '-' + month + '-' + day;
+
     //const checkAccess = "SELECT * FROM users WHERE user_name = ?";
     const checkAccess = "SELECT u.*, case WHEN g.id!='' then 1 else 0 END as gh FROM users u left join group_change_log g on u.user_id=g.group_head WHERE user_name = ? group by u.user_id";
     conn.query(checkAccess, [email], async (err, user) => {
@@ -45,7 +53,8 @@ exports.loginUser = async (req, res) => {
                     */
                     if (gh === 0) {
                         inputData = {
-                            user_id: user_id
+                            user_id: user_id,
+                            entry_date: finaldate
                         }
                         const insertSql = "INSERT INTO tasklist SET ?";
                         conn.query(insertSql, inputData, (err) => {
