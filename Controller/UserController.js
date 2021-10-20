@@ -13,6 +13,15 @@ var transporter = nodemailer.createTransport({
     }
 });
 
+var get_cookies = function (request) {
+    var cookies = {};
+    request.headers && request.headers.cookie.split(';').forEach(function (cookie) {
+        var parts = cookie.match(/(.*?)=(.*)$/)
+        cookies[parts[1].trim()] = (parts[2] || '').trim();
+    });
+    return cookies;
+};
+
 exports.loginUser = async (req, res) => {
     const { email, password } = req.body;
     //const checkAccess = "SELECT * FROM users WHERE user_name = ?";
@@ -197,10 +206,10 @@ const mysql = require('mysql2/promise');
 // create the connection to database
 const connection = async () => {
     return await mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'whosin'
+        host: 'sql6.freemysqlhosting.net',
+        user: 'sql6445658',
+        password: 'SUnXdEZYQE',
+        database: 'sql6445658'
     })
 }
 exports.allUserList________oLDDDD = async (req, res) => {
@@ -323,24 +332,91 @@ exports.forgotPassword = async (req, res) => {
 }
 
 exports.notify = (req, res) => {
+    /*var cookie = 'userid';
+    var cookie_value;
+    var i = req.headers.indexOf(cookie + '=');
+    if (i != -1) {
+        var eq = i + cookie.length + 1;
+        var end = req.headers.indexOf(';', eq);
+        cookie_value = req.headers.substring(eq, end == -1 ? undefined : end);
+    }
+    console.log("COOKID = ", cookie_value);
+*/
+    const date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1; // getMonth returns a zero-based index of the month: 0-11
+    let day = date.getDate(); // 0 - 31
+    let hours = date.getHours(); // 0 - 23
+    let minutes = date.getMinutes(); // 0 - 59
+    let seconds = date.getSeconds(); // 0 - 59
+    if (month < 10) { month = '0' + month }
+    if (day < 10) { day = '0' + day }
+    if (hours < 10) { hours = '0' + hours }
+    if (minutes < 10) { minutes = '0' + minutes }
+    if (seconds < 10) { seconds = '0' + seconds }
+    const finaldate = year + '-' + month + '-' + day;
     const subscription = req.body.subdata
+    let userID = req.body.cokkID;
+    let currdate = finaldate;
+    let set_title = '3 Times Reporting!';
+    var current_time_in_seconds = hours * 3600 + minutes * 60 + seconds;
+    let tasktypecol = ''
+    let tasktime = ''
+    if (current_time_in_seconds >= 41400 && current_time_in_seconds <= 145000) {
+        tasktypecol = 'tasklist1';
+        tasktime = '12PM';
+    } else if (current_time_in_seconds >= 52200 && current_time_in_seconds <= 55800) {
+        tasktypecol = 'tasklist2';
+        tasktime = '3PM';
+    } else if (current_time_in_seconds >= 63000 && current_time_in_seconds <= 267600) {
+        tasktypecol = 'tasklist3';
+        tasktime = '6PM';
+    }
+
     //console.log(subscription)
-    const checkAccess = "SELECT * FROM users WHERE user_id = ? LIMIT 1";
-    conn.query(checkAccess, [req.body.cokkID], async (err, user) => {
+    const checkAccess = "SELECT u.*, case WHEN g.id!='' then 1 else 0 END as gh FROM users u left join group_change_log g on u.user_id=g.group_head WHERE u.user_id = ? group by u.user_id";
+    conn.query(checkAccess, [userID], async (err, user) => {
         if (err) {
             res.send({ message: err })
         } else {
             if (user && user.length > 0) {
-                const { name } = user[0];
-                const payload = JSON.stringify({
-                    title: '3 Times Reporting!',
-                    body: 'Hello ' + name + ', You did not add the today (10-09-2021) TaskList @12 PM. So Please add your tasklist'
-                })
-                webpush.sendNotification(subscription, payload)
-                    .then(result => console.log(result))
-                    .catch(e => console.log(e.stack))
+                const { name, gh } = user[0];
+                if (gh === 0) {
+                    var finaldatenew = "'" + finaldate + "'";
+                    const checkAccessinner = "SELECT task." + tasktypecol + " as task_details, task.user_id FROM tasklist task WHERE task.entry_date =" + finaldatenew + " AND task.user_id = ? LIMIT 1 ";
+                    console.log(checkAccessinner);
+                    conn.query(checkAccessinner, [userID], async (errnew, usertask) => {
+                        if (errnew) {
+                            res.send({ message: errnew })
+                        } else {
+                            if (usertask && usertask.length > 0) {
+                                if (usertask[0].task_details === null || usertask[0].task_details === "" || usertask[0].task_details === undefined) {
+                                    const payload = JSON.stringify({
+                                        title: set_title,
+                                        body: 'Hello ' + name + ', You did not add the today (' + currdate + ') TaskList @' + tasktime + '. So Please add your tasklist'
+                                    })
+                                    webpush.sendNotification(subscription, payload)
+                                        .then(result => console.log(result))
+                                        .catch(e => console.log(e.stack))
 
-                res.status(200).json({ 'success': true })
+                                    res.status(200).json({ 'success': true })
+                                }
+                            } else {
+                                const payload = JSON.stringify({
+                                    title: set_title,
+                                    body: 'Hello ' + name + ', You did not add the today (' + currdate + ') TaskList @' + tasktime + '. So Please login and add your tasklist'
+                                })
+                                webpush.sendNotification(subscription, payload)
+                                    .then(result => console.log(result))
+                                    .catch(e => console.log(e.stack))
+
+                                res.status(200).json({ 'success': true })
+                            }
+                        }
+                    })
+                } else {
+                    res.send({ message: "User is Group Head!" })
+                }
             } else {
                 res.send({ message: "User not registered!" })
             }
