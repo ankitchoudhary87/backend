@@ -361,13 +361,13 @@ exports.notify = (req, res) => {
     var current_time_in_seconds = hours * 3600 + minutes * 60 + seconds;
     let tasktypecol = ''
     let tasktime = ''
-    if (current_time_in_seconds >= 41400 && current_time_in_seconds <= 145000) {
+    if (current_time_in_seconds >= 41400 && current_time_in_seconds <= 45000) {
         tasktypecol = 'tasklist1';
         tasktime = '12PM';
     } else if (current_time_in_seconds >= 52200 && current_time_in_seconds <= 55800) {
         tasktypecol = 'tasklist2';
         tasktime = '3PM';
-    } else if (current_time_in_seconds >= 63000 && current_time_in_seconds <= 267600) {
+    } else if (current_time_in_seconds >= 63000 && current_time_in_seconds <= 66600) {
         tasktypecol = 'tasklist3';
         tasktime = '6PM';
     }
