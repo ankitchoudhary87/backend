@@ -369,7 +369,7 @@ exports.notify = (req, res) => {
     if (current_time_in_seconds >= 21600 && current_time_in_seconds <= 25200) {
         tasktypecol = 'tasklist1';
         tasktime = '12PM';
-    } else if (current_time_in_seconds >= 32400 && current_time_in_seconds <= 40000) {
+    } else if (current_time_in_seconds >= 32400 && current_time_in_seconds <= 42000) {
         tasktypecol = 'tasklist2';
         tasktime = '3PM';
     } else if (current_time_in_seconds >= 43200 && current_time_in_seconds <= 46800) {
