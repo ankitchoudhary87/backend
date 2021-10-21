@@ -89,6 +89,9 @@ exports.addTasklist = async (req, res) => {
             res.send({ message: err })
         } else {
             if (user && user.length > 0) {
+                alert(hours);
+                alert(minutes);
+                alert(seconds)
                 var current_time_in_seconds = hours * 3600 + minutes * 60 + seconds;
                 //console.log("Time in Miliseconds = ", current_time_in_seconds)
                 if ((current_time_in_seconds >= 41400 && current_time_in_seconds <= 45000) || (current_time_in_seconds >= 52200 && current_time_in_seconds <= 55800) || (current_time_in_seconds >= 63000 && current_time_in_seconds <= 66600)) {
@@ -359,7 +362,7 @@ exports.notify = (req, res) => {
     let currdate = finaldate;
     const finaltime = hours + '-' + minutes + '-' + seconds;
     alert(currdate);
-    alert(finaltime)
+    alert(finaltime);
     let set_title = '3 Times Reporting!';
     var current_time_in_seconds = hours * 3600 + minutes * 60 + seconds;
     let tasktypecol = ''
