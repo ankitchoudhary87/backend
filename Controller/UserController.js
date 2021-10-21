@@ -95,14 +95,14 @@ exports.addTasklist = async (req, res) => {
                 //alert(seconds)
                 var current_time_in_seconds = hours * 3600 + minutes * 60 + seconds;
                 //console.log("Time in Miliseconds = ", current_time_in_seconds)
-                if ((current_time_in_seconds >= 21600 && current_time_in_seconds <= 25200) || (current_time_in_seconds >= 32400 && current_time_in_seconds <= 36000) || (current_time_in_seconds >= 43200 && current_time_in_seconds <= 46800)) {
+                if ((current_time_in_seconds >= 21600 && current_time_in_seconds <= 25200) || (current_time_in_seconds >= 32400 && current_time_in_seconds <= 37000) || (current_time_in_seconds >= 43200 && current_time_in_seconds <= 46800)) {
                     if (current_time_in_seconds >= 21600 && current_time_in_seconds <= 25200) {
                         inputData = {
                             tasklist1: req.body.tasklistname,
                             taskchallenge1: req.body.taskchallenge,
                             created_by1: currentdatatime
                         }
-                    } else if (current_time_in_seconds >= 32400 && current_time_in_seconds <= 36000) {
+                    } else if (current_time_in_seconds >= 32400 && current_time_in_seconds <= 37000) {
                         inputData = {
                             tasklist2: req.body.tasklistname,
                             taskchallenge2: req.body.taskchallenge,
