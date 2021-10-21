@@ -66,10 +66,7 @@ exports.loginUser = async (req, res) => {
 }
 
 exports.addTasklist = async (req, res) => {
-    //const date = new Date();
-    const date = new Date().toLocaleString('en-US', {
-        timeZone: 'Asia/Calcutta'
-      });
+    const date = new Date();
     let year = date.getFullYear();
     let month = date.getMonth() + 1; // getMonth returns a zero-based index of the month: 0-11
     let day = date.getDate(); // 0 - 31
@@ -332,9 +329,7 @@ exports.forgotPassword = async (req, res) => {
 }
 
 exports.notify = (req, res) => {
-    const date = new Date().toLocaleString('en-US', {
-        timeZone: 'Asia/Calcutta'
-      });
+    const date = new Date();
     let year = date.getFullYear();
     let month = date.getMonth() + 1; // getMonth returns a zero-based index of the month: 0-11
     let day = date.getDate(); // 0 - 31
