@@ -15,7 +15,11 @@ var transporter = nodemailer.createTransport({
 
 exports.loginUser = async (req, res) => {
     const { email, password } = req.body;
-    const date = new Date();
+    //const date = new Date();
+    const date123 = new Date().toLocaleString('en-US', {
+        timeZone: 'Asia/Calcutta'
+      });
+    const date = new Date(date123);
     let year = date.getFullYear();
     let month = date.getMonth() + 1; // getMonth returns a zero-based index of the month: 0-11
     let day = date.getDate(); // 0 - 31
@@ -434,7 +438,11 @@ exports.notifytest = (req, res) => {
 }
 
 exports.crongh = async (req, res) => {
-    const date = new Date();
+    //const date = new Date();
+    const date123 = new Date().toLocaleString('en-US', {
+        timeZone: 'Asia/Calcutta'
+      });
+    const date = new Date(date123);
     let year = date.getFullYear();
     let month = date.getMonth() + 1; // getMonth returns a zero-based index of the month: 0-11
     let day = date.getDate(); // 0 - 31
