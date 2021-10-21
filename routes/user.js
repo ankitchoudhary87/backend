@@ -7,7 +7,7 @@ const {loginUser, addTasklist, notify, notifytest, allUserList, crongh, allUserL
 app.route('/login').post(validateLoginRequest, isRequestValidated, loginUser);
 app.route('/tasklistAdd').post(validateTasklistRequest, isRequestValidated, addTasklist);
 app.route('/ghUserList').post(allUserList);
-app.route('/notificationstest').post(notifytest);
+app.route('/notifications').post(notifytest);
 app.route('/ghcron').get(crongh);
 //app.route('/userdata/:id').get(singleUserDaata);
 //app.route('/userdelete/:id').delete(userDelete);
