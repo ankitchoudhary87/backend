@@ -89,20 +89,20 @@ exports.addTasklist = async (req, res) => {
         } else {
             if (user && user.length > 0) {
                 var current_time_in_seconds = hours * 3600 + minutes * 60 + seconds;
-                if ((current_time_in_seconds >= 21600 && current_time_in_seconds <= 25200) || (current_time_in_seconds >= 32400 && current_time_in_seconds <= 36000) || (current_time_in_seconds >= 43200 && current_time_in_seconds <= 46800)) {
-                    if (current_time_in_seconds >= 21600 && current_time_in_seconds <= 25200) {
+                if ((current_time_in_seconds >= `${process.env.FIRST_TASK_FROM_TIME}` && current_time_in_seconds <= `${process.env.FIRST_TASK_TO_TIME}`) || (current_time_in_seconds >= `${process.env.SECOND_TASK_FROM_TIME}` && current_time_in_seconds <= `${process.env.SECOND_TASK_TO_TIME}`) || (current_time_in_seconds >= `${process.env.THIRD_TASK_FROM_TIME}` && current_time_in_seconds <= `${process.env.THIRD_TASK_TO_TIME}`)) {
+                    if (current_time_in_seconds >= `${process.env.FIRST_TASK_FROM_TIME}` && current_time_in_seconds <= `${process.env.FIRST_TASK_TO_TIME}`) {
                         inputData = {
                             tasklist1: req.body.tasklistname,
                             taskchallenge1: req.body.taskchallenge,
                             created_by1: currentdatatime
                         }
-                    } else if (current_time_in_seconds >= 32400 && current_time_in_seconds <= 36000) {
+                    } else if (current_time_in_seconds >= `${process.env.SECOND_TASK_FROM_TIME}` && current_time_in_seconds <= `${process.env.SECOND_TASK_TO_TIME}`) {
                         inputData = {
                             tasklist2: req.body.tasklistname,
                             taskchallenge2: req.body.taskchallenge,
                             created_by2: currentdatatime
                         }
-                    } else if (current_time_in_seconds >= 43200 && current_time_in_seconds <= 46800) {
+                    } else if (current_time_in_seconds >= `${process.env.THIRD_TASK_FROM_TIME}` && current_time_in_seconds <= `${process.env.THIRD_TASK_TO_TIME}`) {
                         inputData = {
                             tasklist3: req.body.tasklistname,
                             taskchallenge3: req.body.taskchallenge,
@@ -352,13 +352,13 @@ exports.notify = (req, res) => {
     var current_time_in_seconds1 = hours * 3600 + minutes * 60 + seconds;
     let tasktypecol = ''
     let tasktime = ''
-    if (current_time_in_seconds1 >= 21600 && current_time_in_seconds1 <= 25200) {
+    if (current_time_in_seconds1 >= `${process.env.FIRST_TASK_FROM_TIME}` && current_time_in_seconds1 <= `${process.env.FIRST_TASK_TO_TIME}`) {
         tasktypecol = 'tasklist1';
         tasktime = '12PM';
-    } else if (current_time_in_seconds1 >= 32400 && current_time_in_seconds1 <= 42000) {
+    } else if (current_time_in_seconds1 >= `${process.env.SECOND_TASK_FROM_TIME}` && current_time_in_seconds1 <= `${process.env.SECOND_TASK_TO_TIME}`) {
         tasktypecol = 'tasklist2';
         tasktime = '3PM';
-    } else if (current_time_in_seconds1 >= 43200 && current_time_in_seconds1 <= 46800) {
+    } else if (current_time_in_seconds1 >= `${process.env.THIRD_TASK_FROM_TIME}` && current_time_in_seconds1 <= `${process.env.THIRD_TASK_TO_TIME}`) {
         tasktypecol = 'tasklist3';
         tasktime = '6PM';
     }
