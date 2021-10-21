@@ -41,6 +41,14 @@ exports.loginUser = async (req, res) => {
             if (user && user.length > 0) {
                 if (user[0].password === password) {
                     const { user_id, user_name, name, employee_code, gh } = user[0];
+
+                    // Set a cookie
+                    res.cookie('nameOfuserid', user_id, {
+                        maxAge: 60 * 60 * 1000, // 1 hour
+                        secure: true,
+                        sameSite: true,
+                    })
+
                     if (gh === 0) {
                         inputData = {
                             user_id: user_id,
@@ -67,7 +75,7 @@ exports.loginUser = async (req, res) => {
 
 exports.addTasklist = async (req, res) => {
 //    alert("Ankit Baliyan")
-var cookname = req.cookies.userid;
+var cookname = req.cookies.nameOfuserid;
 
     //const date = new Date();
     const date123 = new Date().toLocaleString('en-US', {
