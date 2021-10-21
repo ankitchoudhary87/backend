@@ -81,20 +81,14 @@ exports.addTasklist = async (req, res) => {
     const finaldate = year + '-' + month + '-' + day;
     const finaltime = hours + ':' + minutes + ':' + seconds;
     const currentdatatime = finaldate + ' ' + finaltime
-    //console.log("Current Date = ", currentdatatime);
     var finaldatenew = "'" + finaldate + "'";
     const checkAccess = "SELECT * FROM tasklist WHERE user_id = ? AND entry_date = " + finaldatenew;
-    //alert(checkAccess);
     conn.query(checkAccess, [req.body.user_id], async (err, user) => {
         if (err) {
             res.send({ message: err })
         } else {
             if (user && user.length > 0) {
-                //alert(hours);
-                //alert(minutes);
-                //alert(seconds)
                 var current_time_in_seconds = hours * 3600 + minutes * 60 + seconds;
-                //console.log("Time in Miliseconds = ", current_time_in_seconds)
                 if ((current_time_in_seconds >= 21600 && current_time_in_seconds <= 25200) || (current_time_in_seconds >= 32400 && current_time_in_seconds <= 36000) || (current_time_in_seconds >= 43200 && current_time_in_seconds <= 46800)) {
                     if (current_time_in_seconds >= 21600 && current_time_in_seconds <= 25200) {
                         inputData = {
@@ -366,16 +360,16 @@ exports.notify = (req, res) => {
     let userID = req.body.cokkID;
     let currdate = finaldate;
     let set_title = '3 Times Reporting!';
-    var current_time_in_seconds = hours * 3600 + minutes * 60 + seconds;
+    var current_time_in_seconds1 = hours * 3600 + minutes * 60 + seconds;
     let tasktypecol = ''
     let tasktime = ''
-    if (current_time_in_seconds >= 21600 && current_time_in_seconds <= 25200) {
+    if (current_time_in_seconds1 >= 21600 && current_time_in_seconds1 <= 25200) {
         tasktypecol = 'tasklist1';
         tasktime = '12PM';
-    } else if (current_time_in_seconds >= 32400 && current_time_in_seconds <= 42000) {
+    } else if (current_time_in_seconds1 >= 32400 && current_time_in_seconds1 <= 42000) {
         tasktypecol = 'tasklist2';
         tasktime = '3PM';
-    } else if (current_time_in_seconds >= 43200 && current_time_in_seconds <= 46800) {
+    } else if (current_time_in_seconds1 >= 43200 && current_time_in_seconds1 <= 46800) {
         tasktypecol = 'tasklist3';
         tasktime = '6PM';
     }
@@ -394,7 +388,7 @@ exports.notify = (req, res) => {
                     console.log(checkAccessinner);
                     conn.query(checkAccessinner, [userID], async (errnew, usertask) => {
                         if (errnew) {
-                            res.send({ message: errnew+'-'+currentdatatime+'--'+current_time_in_seconds+'----' })
+                            res.send({ message: errnew+'-'+currentdatatime+'--'+current_time_in_seconds1+'----' })
                         } else {
                             if (usertask && usertask.length > 0) {
                                 if (usertask[0].task_details === null || usertask[0].task_details === "" || usertask[0].task_details === undefined) {
