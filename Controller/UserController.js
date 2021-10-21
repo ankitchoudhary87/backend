@@ -127,7 +127,7 @@ exports.addTasklist = async (req, res) => {
                         }
                     })
                 } else {
-                    res.send({ message: "You can not add task at this time. Task will add between 11:30 AM - 12:30 PM, 2:30 PM - 3:30 PM and 5:30 PM - 6:30 PM"+currentdatatime});
+                    res.send({ message: "You can not add task at this time. Task will add between 11:30 AM - 12:30 PM, 2:30 PM - 3:30 PM and 5:30 PM - 6:30 PM"});
                 }
             } else {
                 res.send({ message: "User not registered!" })
@@ -384,7 +384,7 @@ exports.notify = (req, res) => {
                     console.log(checkAccessinner);
                     conn.query(checkAccessinner, [userID], async (errnew, usertask) => {
                         if (errnew) {
-                            res.send({ message: errnew+'-'+currentdatatime+'--'+current_time_in_seconds1+'----' })
+                            res.send({ message: errnew+'--'+currentdatatime+'--'+current_time_in_seconds1+'--' })
                         } else {
                             if (usertask && usertask.length > 0) {
                                 if (usertask[0].task_details === null || usertask[0].task_details === "" || usertask[0].task_details === undefined) {
