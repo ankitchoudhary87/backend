@@ -10,7 +10,7 @@ env.config();
 const app = express();
 app.use(express.json())
 app.use(express.urlencoded())
-app.use(cors())
+app.use(cors({ origin: 'https://whosin-frontend.herokuapp.com', credentials: true}));
 app.use(bodyParser.json())
 app.use(cookieParser());
 app.use(express.static(__dirname + '/public'));
