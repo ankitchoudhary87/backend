@@ -18,11 +18,11 @@ app.use(express.static(__dirname + '/public'));
 const user = require('./routes/user')
 app.use('/user',user);
 //Routes
-app.post('/setcook', (req, res) => {
+app.get('/setcook', (req, res) => {
     res.cookie('nameOfuserid', "Ankit Baliyan", { expiresIn: "1d", httpOnly: true })
     res.send('Cookie Set Successfully');
 })
-app.post('/getcook', (req, res) => {
+app.get('/getcook', (req, res) => {
     var cookname = req.cookies.nameOfuserid;
     res.send(`Cookies Value is: ${cookname}`);
 })
