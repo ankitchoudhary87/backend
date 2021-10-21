@@ -18,7 +18,10 @@ app.use(express.static(__dirname + '/public'));
 const user = require('./routes/user')
 app.use('/user',user);
 //Routes
-
+app.get('/getcook', (req, res) => {
+    var cookname = req.cookies.userid;
+    res.send(`Cookies Value is: ${cookname}`);
+})
 app.listen(process.env.PORT, () => {
     console.log(`server is running on port ${process.env.PORT}`);
 })
