@@ -421,6 +421,21 @@ exports.notify = (req, res) => {
     })
 }
 
+exports.notifytest = (req, res) => {
+    const subscription = req.body.subdata
+    let userID = req.body.cokkID;
+    let set_title = '3 Times Reporting!';
+    const payload = JSON.stringify({
+        title: set_title,
+        body: 'Hello Ankit, You did not add the today TaskList @6PM. So Please add your tasklist'
+    })
+    webpush.sendNotification(subscription, payload)
+        .then(result => console.log(result))
+        .catch(e => console.log(e.stack))
+
+    res.status(200).json({ 'success': true })
+}
+
 exports.crongh = async (req, res) => {
     const date = new Date();
     let year = date.getFullYear();

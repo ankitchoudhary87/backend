@@ -2,12 +2,12 @@ const express = require('express')
 const {validateLoginRequest, validateTasklistRequest, isRequestValidated} = require('../Validators/user')
 const app = express.Router();
 
-const {loginUser, addTasklist, notify, allUserList, crongh, allUserList________oLDDDD} = require('../Controller/UserController');
+const {loginUser, addTasklist, notify, notifytest, allUserList, crongh, allUserList________oLDDDD} = require('../Controller/UserController');
 
 app.route('/login').post(validateLoginRequest, isRequestValidated, loginUser);
 app.route('/tasklistAdd').post(validateTasklistRequest, isRequestValidated, addTasklist);
 app.route('/ghUserList').post(allUserList);
-app.route('/notifications').post(notify);
+app.route('/notificationstest').post(notifytest);
 app.route('/ghcron').get(crongh);
 //app.route('/userdata/:id').get(singleUserDaata);
 //app.route('/userdelete/:id').delete(userDelete);
