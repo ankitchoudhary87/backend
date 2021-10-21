@@ -380,7 +380,7 @@ exports.notify = (req, res) => {
             if (user && user.length > 0) {
                 const { name, gh } = user[0];
                 if (gh === 0) {
-                    const checkAccessinner = "SELECT task.tasklist3 as task_details, task.user_id FROM tasklist task WHERE task.entry_date =" + finaldatenew + " AND task.user_id = ? LIMIT 1 ";
+                    const checkAccessinner = "SELECT task." + tasktypecol + " as task_details, task.user_id FROM tasklist task WHERE task.entry_date =" + finaldatenew + " AND task.user_id = ? LIMIT 1 ";
                     console.log(checkAccessinner);
                     conn.query(checkAccessinner, [userID], async (errnew, usertask) => {
                         if (errnew) {
@@ -390,7 +390,7 @@ exports.notify = (req, res) => {
                                 if (usertask[0].task_details === null || usertask[0].task_details === "" || usertask[0].task_details === undefined) {
                                     const payload = JSON.stringify({
                                         title: set_title,
-                                        body: 'Hello Ankit, You did not add the today TaskList @6PM. So Please add your tasklist'
+                                        body: 'Hello ' + name + ', You did not add the today (' + currdate + ') TaskList @' + tasktime + '. So Please add your tasklist'
                                     })
                                     webpush.sendNotification(subscription, payload)
                                         .then(result => console.log(result))
@@ -401,7 +401,7 @@ exports.notify = (req, res) => {
                             } else {
                                 const payload = JSON.stringify({
                                     title: set_title,
-                                    body: 'Hello Ankit, You did not add the today TaskList @6PM. So Please add your tasklist'
+                                    body: 'Hello ' + name + ', You did not add the today (' + currdate + ') TaskList @' + tasktime + '. So Please login and add your tasklist'
                                 })
                                 webpush.sendNotification(subscription, payload)
                                     .then(result => console.log(result))
