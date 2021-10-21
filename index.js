@@ -12,7 +12,6 @@ app.use(express.json())
 app.use(express.urlencoded())
 app.use(cors())
 app.use(bodyParser.json())
-app.set("trust proxy", 1)
 //app.use(cookieParser());
 app.use(express.static(__dirname + '/public'));
 // Routes
