@@ -45,6 +45,7 @@ exports.loginUser = async (req, res) => {
                     // Set a cookie
                     res.cookie('nameOfuserid', user_id, {
                         maxAge: 60 * 60 * 1000, // 1 hour
+                        httpOnly: true,
                         secure: true,
                         sameSite: true,
                     })
@@ -75,7 +76,7 @@ exports.loginUser = async (req, res) => {
 
 exports.addTasklist = async (req, res) => {
 //    alert("Ankit Baliyan")
-var cookname = req.cookies.nameOfuserid;
+var cookname = req.cookies.userid;
 
     //const date = new Date();
     const date123 = new Date().toLocaleString('en-US', {
