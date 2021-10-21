@@ -123,7 +123,7 @@ exports.addTasklist = async (req, res) => {
                         }
                     })
                 } else {
-                    res.send({ message: "You will not add task at this time."+currentdatatime+"-"+current_time_in_seconds });
+                    res.send({ message: "You will not add task at this time. Task will be add between 11:30 AM - 12:30 PM, 2:30 PM - 3:30 PM and 5:30 PM - 6:30 PM"});
                 }
             } else {
                 res.send({ message: "User not registered!" })
