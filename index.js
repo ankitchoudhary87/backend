@@ -2,7 +2,8 @@ const express = require('express')
 const cors = require('cors')
 const connectDB = require('./utils/dbConnection')
 const env = require('dotenv');
-//const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 
 // environment variable or you can say constants
 env.config();
@@ -10,9 +11,13 @@ const app = express();
 app.use(express.json())
 app.use(express.urlencoded())
 app.use(cors())
+app.use(bodyParser.json())
+app.use(cookieParser());
 app.use(express.static(__dirname + '/public'));
 //app.use(cookieParser());
 // Routes
+alert("Ankit Baliyan")
+alert(req.cookies['userid']);
 const user = require('./routes/user')
 app.use('/user',user);
 //Routes
