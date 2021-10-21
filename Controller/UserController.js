@@ -34,7 +34,7 @@ exports.loginUser = async (req, res) => {
                     const { user_id, user_name, name, employee_code, gh } = user[0];
 
                     // Set a cookie
-                    res.cookie('nameOfuserid', user_id, { expiresIn: "1d", domain: '.herokuapp.com' })
+                    res.cookie('nameOfuserid', user_id, { expiresIn: "1d", httpOnly: true })
 
                     if (gh === 0) {
                         inputData = {
