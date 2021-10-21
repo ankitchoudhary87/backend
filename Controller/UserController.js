@@ -95,20 +95,20 @@ exports.addTasklist = async (req, res) => {
                 //alert(seconds)
                 var current_time_in_seconds = hours * 3600 + minutes * 60 + seconds;
                 //console.log("Time in Miliseconds = ", current_time_in_seconds)
-                if ((current_time_in_seconds >= 41400 && current_time_in_seconds <= 45000) || (current_time_in_seconds >= 52200 && current_time_in_seconds <= 55800) || (current_time_in_seconds >= 63000 && current_time_in_seconds <= 66600)) {
-                    if (current_time_in_seconds >= 41400 && current_time_in_seconds <= 45000) {
+                if ((current_time_in_seconds >= 21600 && current_time_in_seconds <= 25200) || (current_time_in_seconds >= 32400 && current_time_in_seconds <= 36000) || (current_time_in_seconds >= 43200 && current_time_in_seconds <= 46800)) {
+                    if (current_time_in_seconds >= 21600 && current_time_in_seconds <= 25200) {
                         inputData = {
                             tasklist1: req.body.tasklistname,
                             taskchallenge1: req.body.taskchallenge,
                             created_by1: currentdatatime
                         }
-                    } else if (current_time_in_seconds >= 52200 && current_time_in_seconds <= 55800) {
+                    } else if (current_time_in_seconds >= 32400 && current_time_in_seconds <= 36000) {
                         inputData = {
                             tasklist2: req.body.tasklistname,
                             taskchallenge2: req.body.taskchallenge,
                             created_by2: currentdatatime
                         }
-                    } else if (current_time_in_seconds >= 63000 && current_time_in_seconds <= 66600) {
+                    } else if (current_time_in_seconds >= 43200 && current_time_in_seconds <= 46800) {
                         inputData = {
                             tasklist3: req.body.tasklistname,
                             taskchallenge3: req.body.taskchallenge,
@@ -129,10 +129,7 @@ exports.addTasklist = async (req, res) => {
                         }
                     })
                 } else {
-                    //alert(hours);
-                //alert(minutes);
-                //alert(seconds)
-                    res.send({ message: "You will not add task at this time."+hours+":"+minutes+":"+seconds});
+                    res.send({ message: "You will not add task at this time." });
                 }
             } else {
                 res.send({ message: "User not registered!" })
