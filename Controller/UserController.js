@@ -329,16 +329,6 @@ exports.forgotPassword = async (req, res) => {
 }
 
 exports.notify = (req, res) => {
-    /*var cookie = 'userid';
-    var cookie_value;
-    var i = req.headers.indexOf(cookie + '=');
-    if (i != -1) {
-        var eq = i + cookie.length + 1;
-        var end = req.headers.indexOf(';', eq);
-        cookie_value = req.headers.substring(eq, end == -1 ? undefined : end);
-    }
-    console.log("COOKID = ", cookie_value);
-*/
     const date = new Date();
     let year = date.getFullYear();
     let month = date.getMonth() + 1; // getMonth returns a zero-based index of the month: 0-11
@@ -351,16 +341,15 @@ exports.notify = (req, res) => {
     if (hours < 10) { hours = '0' + hours }
     if (minutes < 10) { minutes = '0' + minutes }
     if (seconds < 10) { seconds = '0' + seconds }
-
     const finaldate = year + '-' + month + '-' + day;
     const finaltime = hours + ':' + minutes + ':' + seconds;
     const currentdatatime = finaldate + ' ' + finaltime
-
     const subscription = req.body.subdata
     let userID = req.body.cokkID;
     let currdate = finaldate;
+    var finaldatenew = "'" + finaldate + "'";
     let set_title = '3 Times Reporting!';
-    var current_time_in_seconds1 = hours * 3600 + minutes * 60 + seconds;
+    var current_time_in_seconds1 = (hours * 3600 + minutes * 60 + seconds);
     let tasktypecol = ''
     let tasktime = ''
     if (current_time_in_seconds1 >= 21600 && current_time_in_seconds1 <= 25200) {
@@ -383,7 +372,6 @@ exports.notify = (req, res) => {
             if (user && user.length > 0) {
                 const { name, gh } = user[0];
                 if (gh === 0) {
-                    var finaldatenew = "'" + finaldate + "'";
                     const checkAccessinner = "SELECT task." + tasktypecol + " as task_details, task.user_id FROM tasklist task WHERE task.entry_date =" + finaldatenew + " AND task.user_id = ? LIMIT 1 ";
                     console.log(checkAccessinner);
                     conn.query(checkAccessinner, [userID], async (errnew, usertask) => {
