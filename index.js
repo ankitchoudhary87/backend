@@ -14,7 +14,6 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(cookieParser());
 app.use(express.static(__dirname + '/public'));
-//app.use(cookieParser());
 // Routes
 const user = require('./routes/user')
 app.use('/user',user);
