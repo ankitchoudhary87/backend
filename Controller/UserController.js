@@ -1,12 +1,10 @@
 const conn = require('../utils/dbConnection');
 var nodemailer = require('nodemailer');
 const env = require('dotenv');
-const webpush = require('web-push')
-env.config();
-const express = require('express')
+const webpush = require('web-push');
+let express = require("express");
 const cookieParser = require('cookie-parser');
-const app = express();
-app.use(cookieParser());
+env.config();
 webpush.setVapidDetails(process.env.WEB_PUSH_CONTACT, process.env.PUBLIC_VAPID_KEY, process.env.PRIVATE_VAPID_KEY)
 
 var transporter = nodemailer.createTransport({
@@ -68,8 +66,8 @@ exports.loginUser = async (req, res) => {
 }
 
 exports.addTasklist = async (req, res) => {
-    var cookname = req.cookies.userid;
-
+    //var cookname = req.cookies.userid;
+    var cookname = Cookies.get('userid');
     //const date = new Date();
     const date123 = new Date().toLocaleString('en-US', {
         timeZone: 'Asia/Calcutta'
