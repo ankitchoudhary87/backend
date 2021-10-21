@@ -362,8 +362,6 @@ exports.notify = (req, res) => {
     let userID = req.body.cokkID;
     let currdate = finaldate;
     const finaltime = hours + '-' + minutes + '-' + seconds;
-    alert(currdate);
-    alert(finaltime);
     let set_title = '3 Times Reporting!';
     var current_time_in_seconds = hours * 3600 + minutes * 60 + seconds;
     let tasktypecol = ''
