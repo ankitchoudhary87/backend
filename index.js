@@ -3,7 +3,7 @@ const cors = require('cors')
 const connectDB = require('./utils/dbConnection')
 const env = require('dotenv');
 const bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 
 // environment variable or you can say constants
 env.config();

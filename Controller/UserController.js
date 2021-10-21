@@ -13,15 +13,6 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-var get_cookies = function (request) {
-    var cookies = {};
-    request.headers && request.headers.cookie.split(';').forEach(function (cookie) {
-        var parts = cookie.match(/(.*?)=(.*)$/)
-        cookies[parts[1].trim()] = (parts[2] || '').trim();
-    });
-    return cookies;
-};
-
 exports.loginUser = async (req, res) => {
     const { email, password } = req.body;
     const date = new Date();
@@ -73,8 +64,7 @@ exports.loginUser = async (req, res) => {
 }
 
 exports.addTasklist = async (req, res) => {
-//    alert("Ankit Baliyan")
-var cookname = req.cookies.nameOfuserid;
+    var cookname = req.cookies.nameOfuserid;
 
     //const date = new Date();
     const date123 = new Date().toLocaleString('en-US', {
