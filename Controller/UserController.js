@@ -84,15 +84,15 @@ exports.addTasklist = async (req, res) => {
     //console.log("Current Date = ", currentdatatime);
     var finaldatenew = "'" + finaldate + "'";
     const checkAccess = "SELECT * FROM tasklist WHERE user_id = ? AND entry_date = " + finaldatenew;
-    alert(checkAccess);
+    //alert(checkAccess);
     conn.query(checkAccess, [req.body.user_id], async (err, user) => {
         if (err) {
             res.send({ message: err })
         } else {
             if (user && user.length > 0) {
-                alert(hours);
-                alert(minutes);
-                alert(seconds)
+                //alert(hours);
+                //alert(minutes);
+                //alert(seconds)
                 var current_time_in_seconds = hours * 3600 + minutes * 60 + seconds;
                 //console.log("Time in Miliseconds = ", current_time_in_seconds)
                 if ((current_time_in_seconds >= 41400 && current_time_in_seconds <= 45000) || (current_time_in_seconds >= 52200 && current_time_in_seconds <= 55800) || (current_time_in_seconds >= 63000 && current_time_in_seconds <= 66600)) {
