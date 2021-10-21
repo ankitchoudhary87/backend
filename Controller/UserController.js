@@ -34,10 +34,7 @@ exports.loginUser = async (req, res) => {
                     const { user_id, user_name, name, employee_code, gh } = user[0];
 
                     // Set a cookie
-                    res.cookie('nameOfuserid', user_id, {
-                        maxAge: 60 * 60 * 1000, // 1 hour
-                        httpOnly: true
-                    })
+                    res.cookie('nameOfuserid', user_id, { expiresIn: "1d" })
 
                     if (gh === 0) {
                         inputData = {

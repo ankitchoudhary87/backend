@@ -8,11 +8,11 @@ const cookieParser = require('cookie-parser');
 // environment variable or you can say constants
 env.config();
 const app = express();
-app.use(cookieParser());
 app.use(express.json())
 app.use(express.urlencoded())
 app.use(cors())
 app.use(bodyParser.json())
+app.use(cookieParser());
 app.use(express.static(__dirname + '/public'));
 // Routes
 const user = require('./routes/user')
