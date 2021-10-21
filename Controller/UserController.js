@@ -391,7 +391,7 @@ exports.notify = (req, res) => {
                     console.log(checkAccessinner);
                     conn.query(checkAccessinner, [userID], async (errnew, usertask) => {
                         if (errnew) {
-                            res.send({ message: errnew+'-'+current_time_in_seconds })
+                            res.send({ message: errnew+'-'+current_time_in_seconds+'--' })
                         } else {
                             if (usertask && usertask.length > 0) {
                                 if (usertask[0].task_details === null || usertask[0].task_details === "" || usertask[0].task_details === undefined) {
