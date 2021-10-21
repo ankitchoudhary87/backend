@@ -84,6 +84,7 @@ exports.addTasklist = async (req, res) => {
     //console.log("Current Date = ", currentdatatime);
     var finaldatenew = "'" + finaldate + "'";
     const checkAccess = "SELECT * FROM tasklist WHERE user_id = ? AND entry_date = " + finaldatenew;
+    alert(checkAccess);
     conn.query(checkAccess, [req.body.user_id], async (err, user) => {
         if (err) {
             res.send({ message: err })
