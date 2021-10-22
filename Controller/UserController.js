@@ -38,7 +38,7 @@ exports.loginUser = async (req, res) => {
                     const { user_id, user_name, name, employee_code, gh } = user[0];
 
                     // Set a cookie
-                    res.cookie('nameOfuserid', user_id, { expiresIn: "1d", httpOnly: true })
+                    //res.cookie('nameOfuserid', user_id, { expiresIn: "1d", httpOnly: true })
 
                     if (gh === 0) {
                         inputData = {
@@ -65,7 +65,7 @@ exports.loginUser = async (req, res) => {
 }
 
 exports.addTasklist = async (req, res) => {
-    var cookname = req.cookies.userid;
+    //var cookname = req.cookies.userid;
 
     //const date = new Date();
     const date123 = new Date().toLocaleString('en-US', {
